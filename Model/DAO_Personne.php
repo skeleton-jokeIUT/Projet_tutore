@@ -24,7 +24,7 @@ class DAOPersonne{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$personne = new DTOPersonne($i, $data['Nom'], $data['Prenom'], $data['mail']);
+		$personne = new DTOPersonne($i, $data['Nom'], $data['Prenom'], $data['mail'],$data['Role'], $data['Age'], $data['Nationalite'], $data['Statut_marital'] ,$data['Profession'] ,$data['revenu'], $data['ville']);
 		return $personne;
 	}
 }

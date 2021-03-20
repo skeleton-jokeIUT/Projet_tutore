@@ -15,12 +15,18 @@ Class DTOPersonne{
 	private $ville;
 
 
-	public function __construct($id, $nom, $prenom, $mail){
+	public function __construct($id, $nom, $prenom, $mail,$role,$age,$nationalite,$statutMarital,$profession,$revenu,$ville){
 
 		$this->idPersonne=$id;
 		$this->nom=$nom;
 		$this->prenom=$prenom;
 		$this->mail=$mail;
+		$this->age=$age;
+		$this->nationalite=$nationalite;
+		$this->statutMarital=$statutMarital;
+		$this->profession=$profession;
+		$this->revenu=$revenu;
+		$this->ville=$ville;
 
 
 	}
