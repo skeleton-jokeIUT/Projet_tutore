@@ -2,7 +2,7 @@
 
 require_once('../Model/DTO_Client.php');
 
-class DAOPersonne{
+class DAOClient{
 
 	private $bdd; 
 
@@ -24,7 +24,7 @@ class DAOPersonne{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$personne = new DTOPersonne($i, $data['ID_Client'], $data['ID_Personne'], $data['Login'],$data['MDP']);
-		return $personne;
+		$client = new DTOClient($data['ID_Client'], $data['ID_Personne'], $data['Login'], $data['MDP']);
+		return $client;
 	}
 }

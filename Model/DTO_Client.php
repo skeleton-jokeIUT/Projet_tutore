@@ -31,7 +31,7 @@ Class DTOClient{
 				return $this->login;
 				break;
 			
-			case 'mot_de pase':
+			case 'mdp':
 				return $this->mdp;
 				break;		
 			
@@ -58,7 +58,7 @@ Class DTOClient{
 				$this->login=$val;
 				break;
 			
-			case 'mot_de pase':
+			case 'mdp':
 				$this->mdp=$val;
 				break;		
 			
