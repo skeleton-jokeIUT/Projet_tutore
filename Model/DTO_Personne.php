@@ -1,6 +1,6 @@
 <?php
 
-Class DTOPersonne(){
+Class DTOPersonne{
 
 	private $idPersonne;
 	private $nom;
@@ -14,16 +14,11 @@ Class DTOPersonne(){
 	private $revenu;
 	private $ville;
 
-	public function __construct($id){
+
+	public function __construct($id, $nom, $prenom, $mail){
 
 		$this->idPersonne=$id;
-	
-	}
-
-	public function __construct($id, $name, $prenom, $mail){
-
-		$this->idPersonne=$id;
-		$this->nom=$name
+		$this->nom=$nom;
 		$this->prenom=$prenom;
 		$this->mail=$mail;
 
@@ -36,7 +31,7 @@ Class DTOPersonne(){
 
 			case'id' : 
 			return $this->idPersonne;
-			break; 
+			
 
 			case'nom' : 
 			return $this->nom;
@@ -80,6 +75,8 @@ Class DTOPersonne(){
 
 		}
 	}
+
+	//rajouter public function __set($attribut){}
 		
 
 }

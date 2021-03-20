@@ -1,13 +1,15 @@
 <?php
 
-class DAOPersonne(){
+require_once('../Model/DTO_Personne.php');
+
+class DAOPersonne{
 
 	private $bdd; 
 
 	public function __construct(){
 		try{
    			$this->bdd= new PDO(
-   				'mysql:host=localhost;dbname=joueur;charset=utf8',
+   				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
    				'Johan',
    				'1234');
 		}
@@ -18,11 +20,11 @@ class DAOPersonne(){
 	}
 
 	public function getById($i) { #permet de récupérer une ligne d'une personne via l'ID
- 		$sql = 'SELECT * FROM personne WHERE id_Personne=?';
+ 		$sql = 'SELECT * FROM personne WHERE ID_personne=?';
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$joueur = new DTOjoueur($i, $data['libelle'], $data['prix']);
-		return $joueur;
+		$personne = new DTOPersonne($i, $data['Nom'], $data['Prenom'], $data['mail']);
+		return $personne;
 	}
 }
