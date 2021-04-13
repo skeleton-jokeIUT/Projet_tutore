@@ -1,6 +1,6 @@
 <?php
 
-Class DTOClient{
+Class DTOSondage{
 
 	private $numero_sondage;
 	private $ID_client;
@@ -8,11 +8,11 @@ Class DTOClient{
 	private $date_creation;
 	private $date_fin;
 
-	public function __construct($numSondage, $idClient, $nbQuestion, $dateCreation, $dateFin){
+	public function __construct($numeroSondage, $idClient, $nombreQuestion, $dateCreation, $dateFin){
 
-		$this->numero_sondage=$numSondage;
+		$this->numero_sondage=$numeroSondage;
 		$this->ID_client=$idClient;
-		$this->nombre_question=$nbQuestion;
+		$this->nombre_question=$nombreQuestion;
 		$this->date_creation=$dateCreation;
 		$this->date_fin=$dateFin;
 
@@ -21,7 +21,7 @@ Class DTOClient{
 	public function __get($attribut){
 
 		switch ($attribut) {
-			case 'numSondage':
+			case 'numeroSondage':
 				return $this->numero_sondage;
 				break;
 
@@ -29,7 +29,7 @@ Class DTOClient{
 				return $this->ID_client;
 				break;
 				
-			case 'nbQuestion':
+			case 'nombreQuestion':
 				return $this->nombre_question;
 				break;
 			
@@ -52,7 +52,7 @@ Class DTOClient{
 
 		switch ($attribut){
 
-			case 'numSondage':
+			case 'numeroSondage':
 				$this->numero_sondage=$val;
 				break;
 
@@ -60,7 +60,7 @@ Class DTOClient{
 				$this->ID_client=$val;
 				break;
 				
-			case 'nbQuestion':
+			case 'nombreQuestion':
 				$this->nombre_question=$val;
 				break;
 			

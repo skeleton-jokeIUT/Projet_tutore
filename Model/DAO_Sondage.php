@@ -2,7 +2,7 @@
 
 require_once('../Model/DTO_Sondage.php');
 
-class DAOClient{
+class DAOSondage{
 
 	private $bdd; 
 
@@ -24,7 +24,7 @@ class DAOClient{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nombre_question'], $data['Date_Creation'], $data['Date_fin']);
+		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nombre_question'], $data['Date_creation'], $data['Date_fin']);
 		return $sondage;
 	}
 }

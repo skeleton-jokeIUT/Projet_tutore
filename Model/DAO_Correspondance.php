@@ -19,12 +19,12 @@ class DAOCorrespondance{
 		}
 	}
 
-	public function getById($idQuestion, $numero_sondage) { 
+	public function getById($numeroSondage, $idQuestion) { 
  		$sql = 'SELECT * FROM correspondance WHERE ID_Question=? and numero_sondage =? ';
 		$req = $this->bdd->prepare($sql);
-		$req->execute([$idQuestion], [$numero_sondage]);
+		$req->execute([$idQuestion, $numeroSondage]);
 		$data = $req->fetch(); 
-		$correspondance = new DTOClient($data['ID_Question'], $data['numero_sondage']);
+		$correspondance = new DTOCorrespondance($data['ID_Question'], $data['numero_sondage']);
 		return $correspondance;
 	}
 }
