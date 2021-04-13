@@ -2,7 +2,7 @@
 
 require_once('../Model/DTO_Correspondance.php');
 
-class DAOClient{
+class DAOCorrespondance{
 
 	private $bdd; 
 

@@ -1,28 +1,40 @@
 <?php
 
+
 Class DTOClient{
 
-	private $idQuestion;
-	private $numeroSondage;
-	
-	public function __construct($idQuestion, $numeroSondage){
+	private $idClient;
+	private $idPersonne;
+	private $login;
+	private $mdp;
 
-		$this->idQuestion=$idQuestion;
-		$this->numeroSondage=$numeroSondage;
-		
+	public function __construct($idC, $idP, $login, $mdp){
+
+		$this->idClient=$idC;
+		$this->idPersonne=$idP;
+		$this->login=$login;
+		$this->mdp=$mdp;
 
 	}
 
 	public function __get($attribut){
 
 		switch ($attribut) {
-			case 'idQuestion':
-				return $this->idQuestion;
+			case 'idClient':
+				return $this->idClient;
 				break;
 
-			case 'numeroSondage':
-				return $this->numeroSondage;
+			case 'idPersonne':
+				return $this->idPersonne;
 				break;
+				
+			case 'login':
+				return $this->login;
+				break;
+			
+			case 'mdp':
+				return $this->mdp;
+				break;		
 			
 			default:
 				return "null";
@@ -35,13 +47,21 @@ Class DTOClient{
 
 		switch ($attribut){
 
-			case 'idQuestion':
-				$this->idQuestion=$val;
+			case 'idClient':
+				$this->idClient=$val;
 				break;
 
-			case 'numeroSondage':
-				$this->numeroSondage=$val;
+			case 'idPersonne':
+				$this->idPersonne=$val;
 				break;
+				
+			case 'login':
+				$this->login=$val;
+				break;
+			
+			case 'mdp':
+				$this->mdp=$val;
+				break;		
 			
 			default:
 				return "null";
