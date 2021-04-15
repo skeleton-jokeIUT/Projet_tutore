@@ -27,4 +27,30 @@ class DAOSondage{
 		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nombre_question'], $data['Date_creation'], $data['Date_fin']);
 		return $sondage;
 	}
+
+
+	public function choixSondage(){
+
+	}
+
+	public function creerSondage($nom, $dateDebut, $dateFin){
+
+		if($dateFin!=""){
+
+			$sql='INSERT INTO sondage(nomSondage, Date_creation, Date_fin) values(:t_nom, :t_debut, :t_fin)';
+			$req=$this->bdd->prepare($sql);
+			$req->execute(array('t_nom' =>$nom ,
+								't_debut'=>$dateDebut,
+								't_fin'=>$dateFin));
+
+		}
+		else{
+
+			$sql='INSERT INTO sondage(nomSondage, Date_creation) values(:t_nom, :t_debut)';
+			$req=$this->bdd->prepare($sql);
+			$req->execute(array('t_nom' =>$nom ,
+								't_debut'=>$dateDebut));
+
+		}
+	}
 }

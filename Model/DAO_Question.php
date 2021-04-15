@@ -27,4 +27,6 @@ class DAOQuestion{
 		$question = new DTOQuestion($data['ID_Question'], $data['Sous_categorie'], $data['nb_champs'], $data['contenu']);
 		return $question;
 	}
+
+	
 }

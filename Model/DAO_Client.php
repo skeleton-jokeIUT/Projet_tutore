@@ -28,15 +28,18 @@ class DAOClient{
 		return $client;
 	}
 
-	public function inscription($login){
+	public function inscription($login, $mdp){
 
 		$sql = 'SELECT Login from client where login=?';
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$login]);
-		$data=$req->fetch;
+		$data=$req->fetch();
 		
-		if($data['name']!=$login){
-			echo "inscription ok";
+		if($data['login']!=$login){
+			
+			$sql = 'INSERT INTO client (login, MDP) values ($login, $mdp)';
+			$req = $this->bdd->prepare($sql);
+			$req->execute();
 		}
 		else echo "ce pseudo existe déjà. Merci d'en saisir un autre.";	
 
