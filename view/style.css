@@ -1,0 +1,15 @@
+
+@font-face {
+  font-family: 'East_Market';
+  src: url('font/eastmark.ttf');
+}
+
+@font-face {
+  font-family: 'Banksia';
+  src: url('font/banksia/banksb20.ttf');
+}
+
+body {
+  font-family:  Banksia;
+  color: brown;
+}
