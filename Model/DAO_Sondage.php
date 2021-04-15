@@ -63,8 +63,6 @@ class DAOSondage{
 		while($data=$req->fetch()){
 			echo $data['nomSondage']."<br>";
 		}
-
-
-
 	}
+	
 }

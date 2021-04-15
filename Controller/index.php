@@ -24,11 +24,14 @@ if (isset($_GET['deco'])){
 	unset($_SESSION);
 }
 
-if (isset($_POST['inscription'])) {
+if (isset($_GET['inscription'])) {
 
 	$module='inscription';
 
 }
+
+echo $module;
+
 
 if(isset($_POST['inscrire'])){
 
@@ -50,17 +53,20 @@ if (isset($_GET['creer_sondage'])){
 	$module='sondage';
 }
 
-if ($module=='accueil'){
-
-	include('accueil.html');
-	
-}
 
 if ($module=='inscription'){
 
-	if(isset($_POST['name']) && $_POST['name']!="") echo "page suivante";
-	else include('inscription.html');
+		include('../Vue/start.php');
+		include('../Vue/form-inscription.php');
+		include('../Vue/end.php');
+	
+	}
+if(isset($_GET['login'])){
+
+	$module='connexion';
+
 }
+
 
 if($module=='sondage'){
 
@@ -69,21 +75,52 @@ if($module=='sondage'){
 		if(isset($_POST['nom']) && isset($_POST['dateDebut']) && $_POST['dateDebut']!="" && $_POST['nom']!=""){
 
 			$sondage->creerSondage($_POST['nom'], $_POST['dateDebut'], $_POST['dateFin']);
-			echo "le sondage a été créé";
-
+			$module='question';
+			echo "le sondage a bien été créé";
 
 		}
 		else {
 
 			echo "une case obligatoire n'a pas été renseignée";
+			/*echo"Liste Sondage : <br>";
+			$sondage->afficherListeSondage(2);*/
+			include('../Vue/start.php');
+			include('sondage.html');
+			include('../Vue/end.php');
 
 		}
 
 	}
+	else {
+		/*echo"Liste Sondage : <br>";
+		$sondage->afficherListeSondage(2);*/
+		include('../Vue/start.php');
+		include('sondage.html');
+		include('../Vue/end.php');
+	}
 
-	/*echo"Liste Sondage : <br>";
-	$sondage->afficherListeSondage(2);*/
+
+}
+
+if($module=='connexion'){
+
+	include('../Vue/start.php');
+	include('../Vue/form-connexion.php');
+	include('../Vue/end.php');
+}
+
+if($module=='question'){
+
+	include('../Vue/start.php');
+	include('question.html');
+	include('../Vue/end.php');
+
+}
+
+if ($module=='accueil'){
+
+	include('../Vue/start.php');
+	include('../Vue/home.php');
+	include('../Vue/end.php');
 	
-	include('sondage.html');
-
 }

@@ -28,26 +28,53 @@ class DAOClient{
 		return $client;
 	}
 
-	public function inscription($login, $mdp){
-
-		$sql = 'SELECT Login from client where login=?';
+	public function getByLogin($i) { #permet de récupérer une ligne d'une personne via l'ID
+ 		$sql = 'SELECT * FROM client WHERE login=?';
 		$req = $this->bdd->prepare($sql);
-		$req->execute([$login]);
-		$data=$req->fetch();
+		$req->execute([$i]);
+		$data = $req->fetch(); 
+		$client = new DTOClient($data['ID_Client'], $data['ID_Personne'], $data['Login'], $data['MDP']);
+		return $client;
+	}
+
+	public function connexion($login,$mdp){
+
+        $requete ='select * from client where Login=?;';
+		$reponse = $this->bdd->prepare($requete);
+		$reponse->execute(array($login));
+		$data = $reponse ->fetch();
+        $reponse->closeCursor();	
+        if($login == $data['Login'] && $mdp == $data['MDP'])
+        {
+            return true;
+        }
+        else return false;      
+    }
+
+    public function existClient($email){
 		
-		if($data['login']!=$login){
-			
-			$sql = 'INSERT INTO client (login, MDP) values ($login, $mdp)';
-			$req = $this->bdd->prepare($sql);
-			$req->execute();
-		}
-		else echo "ce pseudo existe déjà. Merci d'en saisir un autre.";	
-
+        $requete='select * from client;';
+		$reponse=$this->bdd->query($requete);
+        	while ($data=$reponse ->fetch())
+				{
+					if ($email==$data['Login'])
+					{
+						$reponse->closeCursor();
+                        return true;
+                    }
+				}
+        $reponse->closeCursor();
+		return false;
 	}
 
-	public function connexion(){
+		//insert user dans la table Cleint 
+	public function inscription($email,$mdp){
 
-
+			$p_dao=new Personne_DAO();
+			$profil=$p_dao->getByEmail($email);	
+			$requete='INSERT into Client (ID_Personne,Login,MDP) VALUES (:t_id_personne,:t_login,:t_mdp);';
+			$req=$this->bdd->prepare($requete);
+			$req->execute(array('t_id_personne'=>$profil->id, 't_login'=>$email,'t_mdp'=>$mdp));
+		
 	}
-
 }
