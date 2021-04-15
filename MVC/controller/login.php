@@ -23,7 +23,7 @@ if(isset($_POST['btnValider']))
 		}
 		else $message_erreur="Il est interdit l'username comptant plus de 30 caractères!";	
 	}
-	else { $message_erreur= 'Erreur, champs inexistant ou vide'; }
+	else { $message_erreur= 'Erreur, champs invalides'; }
 
 if(isset($_SESSION['login'])) 
 	header('Location: index.php?module=dashboard');

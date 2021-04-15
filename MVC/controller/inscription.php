@@ -63,17 +63,18 @@ if(isset($_POST['btnValider']))
 	{
 		if (!$pDao->existPerson($_POST['email']))
 			{
-				$pDao->insertPerson($_POST['nom'],
+				$pDao->insertPersonDefault($_POST['nom'],
 									$_POST['prenom'],
-									$_POST['email'],
-									$_POST['age'],
-									$_POST['nationalite'],
-									$_POST['statut_marital'],
-									$_POST['role'],
-									$_POST['profession'],
-									$_POST['revenu'],
-									$_POST['ville']);
+									$_POST['email']);
 				
+				$attribut= array('age','nationalite','statut_marital','role','profession','revenu','ville');
+				foreach($attribut as $val)	
+				{
+					if(isset($_POST[$val]) && $_POST[$val]!='')
+					{	
+						$pDao->updatePerson($val,$_POST[$val],$_POST['email']);
+					}
+				}		
 				if(!$cDao->existClient($_POST['email']))
 				{
 					$cDao->insertClient($_POST['email'],$_POST['mdp']);

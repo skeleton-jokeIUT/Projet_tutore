@@ -2,6 +2,7 @@
 <div class="content">
     <div class="left"></div>
     <div class="middle" id="form_login">
+		<div class="error"><?= $message_erreur ?></div>
 			<form class="form-check-input" action="index.php?module=login" method="POST">
 				<h3>Connexion</h3>
 				<label>Login (votre email): </label>
@@ -12,7 +13,6 @@
 				<button name="btnValider" class="btn-valider">Valider</button>
 				<p><a href="">Mot de passe oublié</a></p>
 			</form>
-		<?= $message_erreur ?>
 	</div>
     <div class="right"></div>
 </div>
