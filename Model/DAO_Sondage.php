@@ -53,4 +53,18 @@ class DAOSondage{
 
 		}
 	}
+
+	public function afficherListeSondage($idClient){
+
+		$sql='SELECT * FROM sondage where ID_client = ?';
+		$req=$this->bdd->prepare($sql);
+		$req->execute([$idClient]);
+		
+		while($data=$req->fetch()){
+			echo $data['nomSondage']."<br>";
+		}
+
+
+
+	}
 }

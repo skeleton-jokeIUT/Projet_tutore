@@ -71,6 +71,7 @@ if($module=='sondage'){
 			$sondage->creerSondage($_POST['nom'], $_POST['dateDebut'], $_POST['dateFin']);
 			echo "le sondage a été créé";
 
+
 		}
 		else {
 
@@ -80,5 +81,9 @@ if($module=='sondage'){
 
 	}
 
+	/*echo"Liste Sondage : <br>";
+	$sondage->afficherListeSondage(2);*/
+	
 	include('sondage.html');
+
 }

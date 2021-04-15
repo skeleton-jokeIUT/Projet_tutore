@@ -28,5 +28,10 @@ class DAOQuestion{
 		return $question;
 	}
 
+	public function creerQuestion(){
+
+		
+		
+	}
 	
 }
