@@ -33,18 +33,18 @@ class DAOClient{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$client = new DTOClient($data['ID_Client'], $data['ID_Personne'], $data['Login'], $data['MDP']);
+		$client = new DTOClient($data['ID_Client'], $data['ID_Personne'], $data['login'], $data['MDP']);
 		return $client;
 	}
 
 	public function connexion($login,$mdp){
 
-        $requete ='select * from client where Login=?;';
+        $requete ='select * from client where login=?;';
 		$reponse = $this->bdd->prepare($requete);
 		$reponse->execute(array($login));
 		$data = $reponse ->fetch();
         $reponse->closeCursor();	
-        if($login == $data['Login'] && $mdp == $data['MDP'])
+        if($login == $data['login'] && $mdp == $data['MDP'])
         {
             return true;
         }
@@ -68,13 +68,13 @@ class DAOClient{
 	}
 
 		//insert user dans la table Cleint 
-	public function inscription($email,$mdp){
+	public function inscription($login,$email,$mdp){
 
-			$p_dao=new Personne_DAO();
-			$profil=$p_dao->getByEmail($email);	
-			$requete='INSERT into Client (ID_Personne,Login,MDP) VALUES (:t_id_personne,:t_login,:t_mdp);';
+			//une personne pas forcément un client.
+			//$profil=$p_dao->getByEmail($email);	
+			$requete='INSERT into Client (login, MDP, email) VALUES (:t_login, :t_mdp, :t_email);';
 			$req=$this->bdd->prepare($requete);
-			$req->execute(array('t_id_personne'=>$profil->id, 't_login'=>$email,'t_mdp'=>$mdp));
+			$req->execute(array('t_login'=>$login, 't_mdp'=>$mdp, ':t_email'=>$email));
 		
 	}
 }

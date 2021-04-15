@@ -2,7 +2,7 @@
 <div class="content">
     <div class="left"></div>
     <div class="middle" id="form_login">
-			<form class="form-check-input" action="index.php?module=login" method="POST">
+			<form class="form-check-input" action="index.php?login" method="POST">
 				<h3>Connexion</h3>
 				<label>Login (votre email): </label>
 				<input type="text"  name="login">
