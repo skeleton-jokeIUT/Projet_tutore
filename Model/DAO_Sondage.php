@@ -61,8 +61,21 @@ class DAOSondage{
 		$req->execute([$idClient]);
 		
 		while($data=$req->fetch()){
-			echo $data['nomSondage']."<br>";
+			echo '<a href="index.php?nomSondage='.$data['nomSondage'].'">'.$data['nomSondage'].'</a><br>';
 		}
 	}
+
+	public function afficherSondage($idClient, $login, $nomSondage){
+
+		$sql='SELECT * FROM sondage where ID_client = ? and nomSondage= ? ';
+		$req=$this->bdd->prepare($sql);
+		$req->execute([$idClient, $nomSondage]);
+		
+		$data=$req->fetch();
+
+		echo "Nom Sondage : ".$data['nomSondage']."<br>Créateur : ".$login."<br>Nombre de question : ".$data['nombre_question'];
+	}
+
+
 	
 }

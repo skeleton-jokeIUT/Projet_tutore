@@ -22,6 +22,7 @@ $module = 'accueil';
 
 if (isset($_GET['deco'])){
 	unset($_SESSION['login']);
+	unset($_SESSION['id']);
 }
 
 if (isset($_GET['inscription'])) {
@@ -62,7 +63,6 @@ if(isset($_GET['login'])){
 		if(isset($_POST['login']) && isset($_POST['mdp']) && $_POST['login']!="" && $_POST['mdp']!=""){
 
 			$clientConnecté=$client->connexion($_POST['login'], $_POST['mdp']);
-			echo $clientConnecté;
 
 			if ($clientConnecté==true) {
 				
@@ -84,7 +84,7 @@ if(isset($_GET['login'])){
 }
 
 if (isset($_GET['creer_sondage'])){
-	
+
 	if(!isset($_SESSION['login'])){
 
 		header("location: index.php");
@@ -112,6 +112,24 @@ if (isset($_GET['creer_sondage'])){
 
 }
 
+if(isset($_GET['liste_sondage'])){
+
+	if(!isset($_SESSION['login'])){
+
+		header("location: index.php");
+	}
+	else $module='listeSondage';
+}
+
+if(isset($_GET['nomSondage'])){
+
+	if(!isset($_SESSION['login'])){
+
+		header("location: index.php");
+	}
+	else $module='infoSondage';
+}
+
 
 if ($module=='inscription'){
 	
@@ -122,21 +140,34 @@ if ($module=='inscription'){
 	}
 
 if ($module=='compte'){
-	
-		include('../Vue/start.php');
-		include('../Vue/dashboard_content.php');
-		include('../Vue/end.php');
-	
-	}
+
+	include('../Vue/start.php');
+	include('../Vue/dashboard_content.php');
+	include('../Vue/end.php');
+
+}
+
+if($module=='listeSondage'){
+
+	include('../Vue/start.php');
+	include('listeSondage.php');
+	include('../Vue/end.php');
+
+}
 
 if($module=='sondage'){
 
-	
-		
-		include('../Vue/start.php');
-		include('sondage.html');
-		include('../Vue/end.php');
-	}
+	include('../Vue/start.php');
+	include('sondage.html');
+	include('../Vue/end.php');
+}
+
+if($module=='infoSondage'){
+
+	include('../Vue/start.php');
+	include('infoSondage.php');
+	include('../Vue/end.php');
+}
 
 if($module=='connexion'){
 

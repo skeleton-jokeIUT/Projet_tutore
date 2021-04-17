@@ -5,7 +5,7 @@
             <div class="middle_left">    
                 <span><a href="index.php?creer_sondage">Créer questionnaire</a></span>
                 <span></span>
-                <span>Consulter Questionnaire</span>
+                <span><a href="index.php?liste_sondage">Consulter Questionnaire</a></span>
                 <span></span>
                 <span>Paramètres</span>
                 <span></span>    
@@ -14,9 +14,6 @@
                 <div>
                     info principale du compte<br>
                     Login : <?= htmlspecialchars($_SESSION["login"]) ?><br>
-                    Liste Sondage : <br> 
-                    $sondage->afficherListeSondage(2)
-
                 </div>
             </div>
         </div>    
