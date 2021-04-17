@@ -4,6 +4,7 @@ session_start();
 
 var_dump($_POST);
 var_dump($_SESSION);
+var_dump($_GET);
 
 require_once('../Model/DAO_Personne.php');
 require_once('../Model/DAO_Client.php');
@@ -11,6 +12,7 @@ require_once('../Model/DAO_Question.php');
 require_once('../Model/DAO_Sondage.php');
 require_once('../Model/DAO_Correspondance.php');
 
+unset($_SESSION['message']);
 
 $personne = new DAOPersonne(); 
 $client= new DAOClient();
@@ -19,6 +21,8 @@ $sondage = new DAOSondage();
 $correspondance = new DAOCorrespondance();
 
 $module = 'accueil';
+$message="";
+
 
 if (isset($_GET['deco'])){
 	unset($_SESSION['login']);
@@ -93,7 +97,8 @@ if (isset($_GET['creer_sondage'])){
 
 		if(isset($_POST['nom']) && isset($_POST['dateDebut']) && $_POST['dateDebut']!="" && $_POST['nom']!=""){
 
-			$sondage->creerSondage($_POST['nom'], $_POST['dateDebut'], $_POST['dateFin']);
+			$sondage->creerSondage($_POST['nom'], $_SESSION['id'], $_POST['dateDebut'], $_POST['dateFin']);
+			$_SESSION['nomSondage']=$_POST['nom'];
 			$module='question';
 			echo "le sondage a bien été créé";
 
@@ -121,13 +126,34 @@ if(isset($_GET['creer_question']) || isset($_POST['ajoutQuestion'])){
 	else $module='question';
 }
 
+if(isset($_POST['parametreQuestion']) || isset($_GET['ajoutChamp'])){
+
+	if(!isset($_SESSION['login'])){
+
+		header("location: index.php");
+	}
+	else if (isset($_GET['ajoutChamp'])){
+
+		$cptChamps = 2;
+		$message=$question->ajoutChamps($cptChamps);
+		$cptChamps++;
+		$module='parametreQuestion';
+
+	}
+	else $module='parametreQuestion';
+
+}
+
 if(isset($_GET['liste_sondage'])){
 
 	if(!isset($_SESSION['login'])){
 
 		header("location: index.php");
 	}
-	else $module='listeSondage';
+	else {
+		$module='listeSondage';
+		unset($_SESSION['nomSondage']);
+	}
 }
 
 if(isset($_GET['nomSondage'])){
@@ -136,9 +162,20 @@ if(isset($_GET['nomSondage'])){
 
 		header("location: index.php");
 	}
-	else $module='infoSondage';
+	else {
+		$module='infoSondage';
+		$_SESSION['nomSondage']=$_GET['nomSondage'];
+	}
 }
 
+
+if ($module=='accueil'){
+
+	include('../Vue/start.php');
+	include('../Vue/home.php');
+	include('../Vue/end.php');
+	
+}
 
 if ($module=='inscription'){
 	
@@ -193,10 +230,14 @@ if($module=='question'){
 
 }
 
-if ($module=='accueil'){
+if($module=='parametreQuestion'){
 
 	include('../Vue/start.php');
-	include('../Vue/home.php');
+	include('parametreQuestion.php');
 	include('../Vue/end.php');
-	
+
 }
+
+
+
+var_dump($module);

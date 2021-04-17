@@ -1,5 +1,5 @@
 <div>
-	<p>Information : <br><a><?= $sondage->afficherSondage($_SESSION['id'],$_SESSION['login'],$_GET['nomSondage'])?></p>
+	<p>Information : <br><a><?= $sondage->afficherSondage($_SESSION['id'],$_SESSION['login'],$_SESSION['nomSondage'])?></p>
 </div>
 
 <div>

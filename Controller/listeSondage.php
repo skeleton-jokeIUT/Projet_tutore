@@ -1,1 +1,1 @@
-<p>Liste sondage : <br><a><?= $sondage->afficherListeSondage($_SESSION['id']) ?></p>
+<p>Liste sondage : <br><a><?= $sondage->afficherListeSondage($_SESSION['id']) ?></a></p>

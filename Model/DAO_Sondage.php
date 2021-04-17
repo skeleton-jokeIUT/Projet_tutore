@@ -33,22 +33,24 @@ class DAOSondage{
 
 	}
 
-	public function creerSondage($nom, $dateDebut, $dateFin){
+	public function creerSondage($nom, $idClient, $dateDebut, $dateFin){
 
 		if($dateFin!=""){
 
-			$sql='INSERT INTO sondage(nomSondage, Date_creation, Date_fin) values(:t_nom, :t_debut, :t_fin)';
+			$sql='INSERT INTO sondage(nomSondage, ID_client, Date_creation, Date_fin) values(:t_nom, :t_ID_client :t_debut, :t_fin)';
 			$req=$this->bdd->prepare($sql);
 			$req->execute(array('t_nom' =>$nom ,
+								't_ID_client'=>$idClient,
 								't_debut'=>$dateDebut,
 								't_fin'=>$dateFin));
 
 		}
 		else{
 
-			$sql='INSERT INTO sondage(nomSondage, Date_creation) values(:t_nom, :t_debut)';
+			$sql='INSERT INTO sondage(nomSondage, ID_client, Date_creation) values(:t_nom, :t_ID_client, :t_debut)';
 			$req=$this->bdd->prepare($sql);
 			$req->execute(array('t_nom' =>$nom ,
+								't_ID_client'=>$idClient,
 								't_debut'=>$dateDebut));
 
 		}
