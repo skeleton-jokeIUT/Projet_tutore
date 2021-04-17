@@ -28,8 +28,9 @@ class DAOQuestion{
 		return $question;
 	}
 
-	public function creerQuestion(){
+	public function creerQuestion($nomQuestion, $sousCat, $champs=array()){
 
+		
 		
 		
 	}

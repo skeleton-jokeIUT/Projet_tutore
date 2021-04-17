@@ -112,6 +112,15 @@ if (isset($_GET['creer_sondage'])){
 
 }
 
+if(isset($_GET['creer_question']) || isset($_POST['ajoutQuestion'])){
+
+	if(!isset($_SESSION['login'])){
+
+		header("location: index.php");
+	}
+	else $module='question';
+}
+
 if(isset($_GET['liste_sondage'])){
 
 	if(!isset($_SESSION['login'])){
@@ -158,7 +167,7 @@ if($module=='listeSondage'){
 if($module=='sondage'){
 
 	include('../Vue/start.php');
-	include('sondage.html');
+	include('sondage.php');
 	include('../Vue/end.php');
 }
 
@@ -179,7 +188,7 @@ if($module=='connexion'){
 if($module=='question'){
 
 	include('../Vue/start.php');
-	include('question.html');
+	include('question.php');
 	include('../Vue/end.php');
 
 }

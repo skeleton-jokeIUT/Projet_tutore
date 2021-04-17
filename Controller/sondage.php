@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../vue/style.css" />
-	<title>Sondage</title>
-</head>
-<body>
 
 	<p>Bonjour, ici vous pouvez créer votre sondage</p>
 
@@ -16,7 +8,3 @@
 		<br><label>Date de fin de diffusion (optionnel) : <input type="date" name="dateFin"></label>
 		<button name="valider">Créer</button>
 	</form>
-
-
-</body>
-</html>
