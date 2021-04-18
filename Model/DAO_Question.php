@@ -28,15 +28,16 @@ class DAOQuestion{
 		return $question;
 	}
 
-	public function creerQuestion($nomQuestion, $sousCat, $champs, $commentaire){
+	public function creerQuestion($nomQuestion, $numeroSondage, $sousCat, $champs, $commentaire){
 
 		switch (sizeof($champs)) {
 			case '1':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>1,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
@@ -44,11 +45,12 @@ class DAOQuestion{
 				break;
 
 			case '2':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, champ2, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>2,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
@@ -57,11 +59,12 @@ class DAOQuestion{
 				break;
 			
 			case '3':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, champ2, champ3, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, champ3, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>3,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
@@ -71,11 +74,12 @@ class DAOQuestion{
 				break;
 
 			case '4':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>4,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
@@ -86,11 +90,12 @@ class DAOQuestion{
 				break;
 				
 			case '5':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, champ5, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_champ5, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, champ5, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_champ5, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>5,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
@@ -102,11 +107,12 @@ class DAOQuestion{
 				break;
 				
 			case '6':
-				$sql='INSERT into question (nomQuestion, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, champ5, champ6, commentaire)
-							values (:t_nomQuestion, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_champ5, :t_champ6, :t_commentaire)';
+				$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, champ3, champ4, champ5, champ6, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_champ4, :t_champ5, :t_champ6, :t_commentaire)';
 				$req=$this->bdd->prepare($sql);
 				$req->execute(array(
 						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
 						't_nb_champs'=>6,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],

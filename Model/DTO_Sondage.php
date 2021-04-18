@@ -4,14 +4,16 @@ Class DTOSondage{
 
 	private $numero_sondage;
 	private $ID_client;
+	private $nomSondage;
 	private $nombre_question;
 	private $date_creation;
 	private $date_fin;
 
-	public function __construct($numeroSondage, $idClient, $nombreQuestion, $dateCreation, $dateFin){
+	public function __construct($numeroSondage, $idClient, $nomSondage, $nombreQuestion, $dateCreation, $dateFin){
 
 		$this->numero_sondage=$numeroSondage;
 		$this->ID_client=$idClient;
+		$this->nomSondage=$nomSondage;
 		$this->nombre_question=$nombreQuestion;
 		$this->date_creation=$dateCreation;
 		$this->date_fin=$dateFin;
@@ -27,6 +29,10 @@ Class DTOSondage{
 
 			case 'idClient':
 				return $this->ID_client;
+				break;
+
+			case 'nomSondage':
+				return $this->nomSondage;
 				break;
 				
 			case 'nombreQuestion':
@@ -59,6 +65,10 @@ Class DTOSondage{
 			case 'idClient':
 				$this->ID_client=$val;
 				break;
+
+			case 'nomSondage':
+				$this->nomSondage=$val;
+				break;	
 				
 			case 'nombreQuestion':
 				$this->nombre_question=$val;

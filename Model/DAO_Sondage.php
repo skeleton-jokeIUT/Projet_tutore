@@ -24,7 +24,16 @@ class DAOSondage{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$i]);
 		$data = $req->fetch(); 
-		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nombre_question'], $data['Date_creation'], $data['Date_fin']);
+		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nomSondage'], $data['nombre_question'], $data['Date_creation'], $data['Date_fin']);
+		return $sondage;
+	}
+
+	public function getByIDclientAndNom($idClient, $nomSondage) { #permet de récupérer une ligne d'une personne via l'ID
+ 		$sql = 'SELECT * FROM sondage WHERE ID_client = ? and nomSondage=?';
+		$req = $this->bdd->prepare($sql);
+		$req->execute([$idClient, $nomSondage]);
+		$data = $req->fetch(); 
+		$sondage = new DTOSondage($data['numero_sondage'], $data['ID_client'], $data['nomSondage'], $data['nombre_question'], $data['Date_creation'], $data['Date_fin']);
 		return $sondage;
 	}
 

@@ -187,7 +187,9 @@ if(isset($_GET['nomSondage'])){
 			}
 			else {
 
-				$question->creerQuestion($_POST['nomQuestion'],'qcm',$champs, $_POST['commentaire']);
+				$nom=$sondage->getByIDclientAndNom($_SESSION['id'], $_GET['nomSondage']);
+				$numero=$nom->__get('numeroSondage');
+				$question->creerQuestion($_POST['nomQuestion'], $numero, 'qcm',$champs, $_POST['commentaire']);
 				
 			}
 		}
@@ -269,6 +271,9 @@ if($module=='parametreQuestion'){
 
 }
 
+$nom=$sondage->getByIDclientAndNom(3, 'test4');
+$test=$nom->__get('numeroSondage');
+echo $test;
 
 
 var_dump($module);
