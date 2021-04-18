@@ -132,14 +132,6 @@ if(isset($_POST['parametreQuestion']) || isset($_GET['ajoutChamp'])){
 
 		header("location: index.php");
 	}
-	else if (isset($_GET['ajoutChamp'])){
-
-		$cptChamps = 2;
-		$message=$question->ajoutChamps($cptChamps);
-		$cptChamps++;
-		$module='parametreQuestion';
-
-	}
 	else $module='parametreQuestion';
 
 }
@@ -154,6 +146,8 @@ if(isset($_GET['liste_sondage'])){
 		$module='listeSondage';
 		unset($_SESSION['nomSondage']);
 	}
+
+
 }
 
 if(isset($_GET['nomSondage'])){
@@ -166,7 +160,44 @@ if(isset($_GET['nomSondage'])){
 		$module='infoSondage';
 		$_SESSION['nomSondage']=$_GET['nomSondage'];
 	}
-}
+
+	if(isset($_POST['sauvegarderQuestion'])){
+
+		if(isset($_POST['nomQuestion']) && $_POST['nomQuestion']!="" && isset($_POST['commentaire']) && $_POST['commentaire']!=""){
+
+			$champs=array();
+
+			$cpt=0;
+
+			for($cptChamp=1;$cptChamp<7;$cptChamp++){
+
+			
+				if ($_POST['champs'.$cptChamp]!=""){
+
+					$champs[$cpt]=$_POST['champs'.$cptChamp];
+					$cpt++;				
+				}
+
+			}		
+
+			if (sizeof($champs)==0){
+
+				 echo "aucune case champs renseignée";
+				 $module='parametreQuestion';
+			}
+			else {
+
+				$question->creerQuestion($_POST['nomQuestion'],'qcm',$champs, $_POST['commentaire']);
+				
+			}
+		}
+		else {
+
+			echo "Les cases titres et ou commentaires n'ont pas été renseignée. Merci de recommencer";
+			$module='parametreQuestion';
+		}
+	}
+}	
 
 
 if ($module=='accueil'){
@@ -233,7 +264,7 @@ if($module=='question'){
 if($module=='parametreQuestion'){
 
 	include('../Vue/start.php');
-	include('parametreQuestion.php');
+	include('parametreQuestionCaseACocher.php');
 	include('../Vue/end.php');
 
 }
