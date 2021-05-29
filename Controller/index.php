@@ -29,6 +29,11 @@ if (isset($_GET['deco'])){
 	unset($_SESSION['id']);
 }
 
+if(isset($_SESSION['login'])){
+
+	$module="compte";	
+}
+
 if (isset($_GET['inscription'])) {
 
 	if(isset($_SESSION['login'])){
@@ -160,46 +165,79 @@ if(isset($_GET['nomSondage'])){
 		$module='infoSondage';
 		$_SESSION['nomSondage']=$_GET['nomSondage'];
 	}
+}	
+
+//Gestion des traitements associés à la création de question
+if(isset($_GET['ajoutQuestion']) || isset($_POST['sauvegarderQuestion'])){
+
+	$module="question";
 
 	if(isset($_POST['sauvegarderQuestion'])){
 
-		if(isset($_POST['nomQuestion']) && $_POST['nomQuestion']!="" && isset($_POST['commentaire']) && $_POST['commentaire']!=""){
+		if((isset($_POST['nomQuestionQCM']) && $_POST['nomQuestionQCM']!="") || (isset($_POST['nomQuestionCommentaire']) && $_POST['nomQuestionCommentaire']!="") || (isset($_POST['nomQuestionEchelle']) && $_POST['nomQuestionEchelle']!="") && isset($_POST['commentaire'])){
 
-			$champs=array();
+			//traitement de la création de qcm et qcu
+			if($_POST['question']=="qcm" || $_POST['question']=="qcu"){
 
-			$cpt=0;
+				$champs=array();
 
-			for($cptChamp=1;$cptChamp<7;$cptChamp++){
+				$cpt=0;
 
-			
-				if ($_POST['champs'.$cptChamp]!=""){
+				for($cptChamp=1;$cptChamp<7;$cptChamp++){
 
-					$champs[$cpt]=$_POST['champs'.$cptChamp];
-					$cpt++;				
-				}
-
-			}		
-
-			if (sizeof($champs)==0){
-
-				 echo "aucune case champs renseignée";
-				 $module='parametreQuestion';
-			}
-			else {
-
-				$nom=$sondage->getByIDclientAndNom($_SESSION['id'], $_GET['nomSondage']);
-				$numero=$nom->__get('numeroSondage');
-				$question->creerQuestion($_POST['nomQuestion'], $numero, 'qcm',$champs, $_POST['commentaire']);
 				
+					if ($_POST['champs'.$cptChamp]!=""){
+
+						$champs[$cpt]=$_POST['champs'.$cptChamp];
+						$cpt++;				
+					}
+
+				}		
+
+				if (sizeof($champs)==0){
+
+					 $message="aucune case champs renseignée";
+					 $module="question";
+				}
+				else {
+
+					$nom=$sondage->getByIDclientAndNom($_SESSION['id'], $_SESSION['nomSondage']);
+					$numero=$nom->__get('numeroSondage');
+					if($_POST['question']=="qcm") $question->creerQCM($_POST['nomQuestionQCM'], $numero, 'qcm',$champs, $_POST['commentaire']);
+					else $question->creerQCM($_POST['nomQuestionQCM'], $numero, 'qcu',$champs, $_POST['commentaire']);
+					$module='infoSondage';
+				}
+			}
+			
+			//traitement de la création d'échelle
+			else if($_POST['question']=="echelle"){
+
+				$nom=$sondage->getByIDclientAndNom($_SESSION['id'], $_SESSION['nomSondage']);
+				$numero=$nom->__get('numeroSondage');
+				$question->creerQuestionEchelle($_POST['nomQuestionEchelle'], $numero, 'echelle',$_POST['min'], $_POST['max'], $_POST['increment'], $_POST['commentaire']);
+				$module='infoSondage';
+
+			}
+			//traitement de la création de texte
+			else if($_POST['question']=="commentaire"){
+
+				echo "COMMENT";
+
+				$nom=$sondage->getByIDclientAndNom($_SESSION['id'], $_SESSION['nomSondage']);
+				$numeroSondage=$nom->__get('numeroSondage');
+				$question->creerQuestionCommentaire($_POST['nomQuestionCommentaire'], $numeroSondage, 'commentaire');
+				$module='infoSondage';
+
 			}
 		}
 		else {
 
-			echo "Les cases titres et ou commentaires n'ont pas été renseignée. Merci de recommencer";
-			$module='parametreQuestion';
+			$message= "Les cases titres et/ou commentaires n'ont pas été renseignée. Merci de recommencer";
+			$module='question';
 		}
 	}
-}	
+}
+
 
 
 if ($module=='accueil'){
@@ -229,7 +267,7 @@ if ($module=='compte'){
 if($module=='listeSondage'){
 
 	include('../Vue/start.php');
-	include('listeSondage.php');
+	include('../Vue/listeSondage.php');
 	include('../Vue/end.php');
 
 }
@@ -237,14 +275,14 @@ if($module=='listeSondage'){
 if($module=='sondage'){
 
 	include('../Vue/start.php');
-	include('sondage.php');
+	include('../Vue/sondage.php');
 	include('../Vue/end.php');
 }
 
 if($module=='infoSondage'){
 
 	include('../Vue/start.php');
-	include('infoSondage.php');
+	include('../Vue/infoSondage.php');
 	include('../Vue/end.php');
 }
 
@@ -258,7 +296,7 @@ if($module=='connexion'){
 if($module=='question'){
 
 	include('../Vue/start.php');
-	include('question.php');
+	include('../Vue/question.php');
 	include('../Vue/end.php');
 
 }
@@ -266,7 +304,7 @@ if($module=='question'){
 if($module=='parametreQuestion'){
 
 	include('../Vue/start.php');
-	include('parametreQuestionCaseACocher.php');
+	include('../Vue/parametreQuestionCaseACocher.php');
 	include('../Vue/end.php');
 
 }

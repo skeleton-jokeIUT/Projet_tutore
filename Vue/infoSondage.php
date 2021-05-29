@@ -5,7 +5,7 @@
 <div>
 	<p>Liste questions : créer la fonction "afficherlisteQuestion" après avoir ajouté la possibilité de créer des questions et trigger sur table correspondance
 	</p>
-	<form method="post" action="index.php">
+	<form method="GET" action="index.php?creerQuestion">
 		<button name="ajoutQuestion">Ajoutez question</button>
 	</form>
 </div>	

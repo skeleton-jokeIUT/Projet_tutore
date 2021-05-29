@@ -28,7 +28,9 @@ class DAOQuestion{
 		return $question;
 	}
 
-	public function creerQuestion($nomQuestion, $numeroSondage, $sousCat, $champs, $commentaire){
+	public function creerQCM($nomQuestion, $numeroSondage, $sousCat, $champs, $commentaire){
+
+		if($commentaire=="") $commentaire="non";
 
 		switch (sizeof($champs)) {
 			case '1':
@@ -41,7 +43,7 @@ class DAOQuestion{
 						't_nb_champs'=>1,
 						't_sousCat'=>$sousCat,
 						't_champ1'=>$champs[0],
-						't_commentaire'=>$commentaire));	
+						't_commentaire'=>$commentaire));
 				break;
 
 			case '2':
@@ -129,6 +131,38 @@ class DAOQuestion{
 				break;
 		}
 
+	}
+
+	public function creerQuestionEchelle($nomQuestion, $numeroSondage, $sousCat, $min, $max, $increment, $commentaire){
+
+		$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, Sous_categorie, champ1, champ2, champ3, commentaire)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_sousCat, :t_champ1, :t_champ2, :t_champ3, :t_commentaire)';
+				$req=$this->bdd->prepare($sql);
+				$req->execute(array(
+						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
+						't_nb_champs'=>3,
+						't_sousCat'=>$sousCat,
+						't_champ1'=>$min,
+						't_champ2'=>$max,
+						't_champ3'=>$increment,
+						't_commentaire'=>$commentaire));
+
+	}
+
+	public function creerQuestionCommentaire($nomQuestion, $numeroSondage, $sousCat){
+
+		echo $nomQuestion.' '.$numeroSondage.' '.$sousCat;
+
+		$sql='INSERT into question (nomQuestion, ID_Sondage, nb_champs, champ1, Sous_categorie)
+							values (:t_nomQuestion, :t_ID_sondage, :t_nb_champs, :t_champ1, :t_sousCat)';
+		$req=$this->bdd->prepare($sql);
+		$req->execute(array(
+						't_nomQuestion'=>$nomQuestion,
+						't_ID_sondage'=>$numeroSondage,
+						't_nb_champs'=>1,
+						't_champ1'=>"",
+						't_sousCat'=>$sousCat));
 	}
 
 	public function remplirTableau(){
