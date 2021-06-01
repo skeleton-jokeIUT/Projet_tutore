@@ -238,7 +238,18 @@ if(isset($_GET['ajoutQuestion']) || isset($_POST['sauvegarderQuestion'])){
 	}
 }
 
+if(isset($_GET['reponse']))
+{
+	$module="reponse";
+	if(isset($_GET['idSondage']) && $_GET['idSondage']!="" )
+	{
+		$idSondage = $_GET['idSondage'];
+		//echo $idSondage;
+		$questions = $question->getByIdSondage($idSondage);
+		//var_dump($questions);
+	}
 
+}
 
 if ($module=='accueil'){
 
@@ -309,9 +320,17 @@ if($module=='parametreQuestion'){
 
 }
 
+if($module=='reponse'){
+
+	include('../Vue/start.php');
+	include('../Vue/reponse.php');
+	include('../Vue/end.php');
+
+}
+
 $nom=$sondage->getByIDclientAndNom(3, 'test4');
 $test=$nom->__get('numeroSondage');
 echo $test;
 
 
-var_dump($module);
+//var_dump($module);

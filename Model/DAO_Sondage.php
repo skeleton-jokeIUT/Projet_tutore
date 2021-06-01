@@ -10,10 +10,9 @@ class DAOSondage{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'Johan',
-   				'1234');
-		}
-
+   				'util',
+   				'Util1234!');
+   		}
 		catch (Exception $e) {
      		die('Erreur'.$e->getMessage());
 		}

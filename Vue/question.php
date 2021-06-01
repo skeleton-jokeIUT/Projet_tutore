@@ -41,6 +41,8 @@
 
 				<legend>Champs Question</legend>
 					<p>Veuillez préciser la valeur de début et celle de fin ainsi que l'écart en chaque valeur</p>
+					<label> Label min <input type="text" id="label-min" name="label-min"></label>
+					<label> Label max <input type="text" id="label-max" name="label-max"></label>
 					<label>Valeur minimum : <input type="number" id="min" name="min"></label>
 					<br><label>Valeur Maximum : <input type="number" id="max" name="max"></label>
 					<br><label>Incrément : <input type="number" id="increment" name="increment"></label>

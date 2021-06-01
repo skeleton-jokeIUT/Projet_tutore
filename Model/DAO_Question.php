@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Model/DTO_Question.php");
+require_once('../Model/DTO_Question.php');
 
 class DAOQuestion{
 
@@ -10,8 +10,8 @@ class DAOQuestion{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'Johan',
-   				'1234');
+   				'util',
+   				'Util1234!');
 		}
 
 		catch (Exception $e) {
@@ -19,13 +19,20 @@ class DAOQuestion{
 		}
 	}
 
-	public function getById($i) { #permet de récupérer une ligne d'une personne via l'ID
- 		$sql = 'SELECT * FROM question WHERE ID_Question=?';
+	public function getByIdSondage($idS) { //permet de récupérer des question d'un sondage indiqué
+ 		$sql = 'SELECT * FROM question WHERE ID_Sondage=?';
 		$req = $this->bdd->prepare($sql);
-		$req->execute([$i]);
-		$data = $req->fetch(); 
-		$question = new DTOQuestion($data['ID_Question'], $data['Sous_categorie'], $data['nb_champs'], $data['contenu']);
-		return $question;
+		$req->execute([$idS]);
+		$data = $req->fetchAll(); 
+		$questions=[];
+		foreach($data as $ligne =>$col)
+		{
+			$questions[$ligne] = new DTOQuestion($col['ID_Question'],$col['ID_Sondage'],$col['nomQuestion'],
+								$col['Sous_categorie'], $col['nb_champs'], $col['champ1'],$col['champ2'],$col['champ3'],
+		  						$col['champ4'],$col['champ5'],$col['champ6'],$col['commentaire']);
+		}
+		
+		return $questions;
 	}
 
 	public function creerQCM($nomQuestion, $numeroSondage, $sousCat, $champs, $commentaire){
