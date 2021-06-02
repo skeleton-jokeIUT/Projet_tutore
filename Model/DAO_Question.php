@@ -175,12 +175,5 @@ class DAOQuestion{
 	public function remplirTableau(){
 
 	}
-
-
-	public function ajoutChamps($cpt){
-
-		return '<br><label>Champ '.$cpt.' :<input type="text" name="champ'.$cpt.'"</label>';
-		
-	}
 	
 }
