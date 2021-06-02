@@ -86,6 +86,7 @@ class DAOSondage{
 		echo "Nom Sondage : ".$data['nomSondage']."<br>Créateur : ".$login."<br>Nombre de question : ".$data['nombre_question'];
 	}
 
+	
 
 	
 }
