@@ -1,0 +1,1 @@
+<?php $question->afficherQuestion($_SESSION['idSondage'])?>

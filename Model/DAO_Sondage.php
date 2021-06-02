@@ -78,8 +78,6 @@ class DAOSondage{
 
 	public function afficherSondage($idClient, $login, $idSondage){
 
-		echo $idSondage;
-
 		$sql='SELECT * FROM sondage where ID_client = ? and numero_sondage= ? ';
 		$req=$this->bdd->prepare($sql);
 		$req->execute([$idClient, $idSondage]);

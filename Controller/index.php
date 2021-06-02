@@ -262,6 +262,9 @@ if(isset($_GET['listeReponse'])){
 
 	}
 
+if(isset($_GET['listeQuestion'])){
+	$module="listeQuestion";
+}
 
 
 if ($module=='accueil'){
@@ -348,9 +351,9 @@ if($module=="listeReponse"){
 
 }
 
-$nom=$sondage->getByIDclientAndNom(3, 'test4');
-$test=$nom->__get('numeroSondage');
-echo $test;
+if($module=="listeQuestion"){
+	include('../Vue/start.php');
+	include('../Vue/voirQuestion.php');
+	include('../Vue/end.php');
 
-
-//var_dump($module);
+}

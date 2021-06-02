@@ -172,9 +172,21 @@ class DAOQuestion{
 						't_sousCat'=>$sousCat));
 	}
 
-	/*
-	public function afficherQuestion($idQuestion){
+	
+	public function afficherQuestion($idSondage){
+
+		$sql='SELECT * from question where ID_Sondage=?';
+		$req=$this->bdd->prepare($sql);
+		$req->execute([$idSondage]);
+
+		$i=1;
+
+		while($data=$req->fetch()){
+
+			echo '<p>Question '.$i.' : '.$data['nomQuestion'].'</p>';
+			$i++;
+		}
 
 	}
-	*/
+	
 }
