@@ -3,20 +3,23 @@
 <head>
 	<title>Surv'Easy</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="../view/style.css" />
+    <link rel="stylesheet" type="text/css" href="../Vue/style.css" />
 </head>
 <body>
 	<header>
 		<div>
-			<a href="index.php"><img src='../view/images/menu.png' alt='image du menu' class="img_menu"</a>
+			Menu
 		</div>
 		<div>
-			<a href="index.php"><img src='../view/images/logo.png' alt='image du logo, lien vers page accueil' class="img_logo"</a>
+			<span>Surv'Easy<span>
 		</div>
 		<div>
-			<a href="index.php?module=login"><img src='../view/images/profil.png' alt='image du profil' class="img_profil"></a>
+			<a href="index.php?login">logo connexion</a>
 		</div>
-		<div class ="deconnexion">
-			<a href="index.php?deco"><?= $message_deco ?></a>
+		<div>
+			<a href="index.php">logo home</a>
+		</div>
+		<div>
+			<a href="index.php?deco">Deconnexion</a>
 		</div>	
 	</header>

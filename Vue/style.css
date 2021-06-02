@@ -1,23 +1,15 @@
 body{
 	background-color: white;
-	font-family:American Typewriter, serif;
 }
 header{
-	/*display : grid;
-	grid-template-columns: 1fr 2fr 1fr 2fr;
+	display : grid;
+	grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
 	justify-items: center;
-	margin: 20px*/
-	display:flex;
-	flex-direction:row;
-	justify-content:space-around;
-	border-bottom:solid deepskyblue;
-	}
-
-footer{
-	/*margin: 20px;
-	border-top:solid deepskyblue;;*/
+	margin: 20px
 }
-
+footer{
+	margin: 20px;
+}
 footer ul{
 	display: grid;
 	grid-auto-flow: column;
@@ -25,53 +17,15 @@ footer ul{
 	list-style: none;
 }
 
-a:hover
-{
-	font-weight:bold;
-}
-
-a
-{
-	text-decoration:none;
-	color:black;
-}
-
-.img_logo
-{	
-	display:block;
-	width:6em;
-	height:5em;
-	margin-left:30em;
-	margin-right:30em;
-}
-
-.img_profil
-{
-	display:block;
-	width:3em;
-	height:3em;
-	margin-top:0.7em;
-}
-
-.img_menu
-{
-	display:block;
-	width:3em;
-	height:3em;
-	margin-top:0.7em;
-}
-
 .content{
 	display: grid;
 	grid-template-columns: 1fr 4fr 1fr;
 }
 .left {
-	background-color: deepskyblue;
-	box-shadow:10px 10px 10px lightgrey;
+	background-color: steelblue;
 }
 .right {
-	background-color: coral;
-	box-shadow:-10px 0px 10px 1px lightgrey;
+	background-color: peru;
 }
 #form_login{
 	justify-self: center;
@@ -107,31 +61,19 @@ fieldset legend{
 }
 .middle p:first-child{
 	text-align: center;
-	font-size:2em;
 }  
-.creer{
-	margin-right:12em;
-	margin-left:2em;
-	text-align:justify;
+.middle p:nth-child(2){
+	float: left;
+	display: block;
+	border: 2px goldenrod solid;
+	margin:5px;
 }
-.middle .diffuser{
-	margin-left:12em;
-	margin-right:2em;
-	text-align:justify;
+.middle p:nth-child(4){
+	float: right;
+	display: block;
+	border: solid 2px goldenrod;
+	margin:5px;
 }
-
-.analyser{
-	margin-right:12em;
-	margin-left:2em;
-	text-align:justify;
-}
-
-.choix {
-	margin-left:12em;
-	margin-right:2em;
-	text-align:justify;
-}
-
 .dashboard {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
@@ -157,15 +99,16 @@ fieldset legend{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	max-width: 45vw;
-	border: 4px solid deepskyblue;
+	border: 4px solid yellowgreen;
 	padding: 10px;
-	margin: 5em;
+	margin: 10px;
 	border-radius: 20px;
 	
 }
 .form-check-input h3:first-child{
 	grid-column: 1/span 2;
 	justify-self: center;
+	border: solid yellowgreen;
 	padding: 10px;
 }
 
@@ -173,21 +116,15 @@ input[type="text"], input[type="password"]{
 	margin: 5px;
 }
 .btn-reset {
-	background-color: white;
-	border:solid black 0.5px;
-	box-shadow:2px 2px 2px lightgrey;
+	background-color: yellow;
 	color:black;
 	padding: 5px;
-	margin-top:2em;
 	
 }
 .btn-valider {
-	background-color: white;
-	color:black;
-	border:solid black 0.5px;
-	box-shadow:2px 2px 2px lightgrey;
+	background-color: blue;
+	color:white;
 	padding: 5px;
-	margin-top:2em;
 	
 }
 button {
