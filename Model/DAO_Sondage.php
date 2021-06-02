@@ -28,6 +28,7 @@ class DAOSondage{
 	}
 
 	public function getByIDclientAndNom($idClient, $nomSondage) { #permet de récupérer une ligne d'une personne via l'ID
+
  		$sql = 'SELECT * FROM sondage WHERE ID_client = ? and nomSondage=?';
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$idClient, $nomSondage]);
@@ -75,11 +76,13 @@ class DAOSondage{
 		}
 	}
 
-	public function afficherSondage($idClient, $login, $nomSondage){
+	public function afficherSondage($idClient, $login, $idSondage){
 
-		$sql='SELECT * FROM sondage where ID_client = ? and nomSondage= ? ';
+		echo $idSondage;
+
+		$sql='SELECT * FROM sondage where ID_client = ? and numero_sondage= ? ';
 		$req=$this->bdd->prepare($sql);
-		$req->execute([$idClient, $nomSondage]);
+		$req->execute([$idClient, $idSondage]);
 		
 		$data=$req->fetch();
 

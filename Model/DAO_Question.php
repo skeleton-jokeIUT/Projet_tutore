@@ -172,8 +172,9 @@ class DAOQuestion{
 						't_sousCat'=>$sousCat));
 	}
 
-	public function remplirTableau(){
+	/*
+	public function afficherQuestion($idQuestion){
 
 	}
-	
+	*/
 }

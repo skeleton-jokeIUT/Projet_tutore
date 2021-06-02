@@ -11,6 +11,7 @@ require_once('../Model/DAO_Client.php');
 require_once('../Model/DAO_Question.php');
 require_once('../Model/DAO_Sondage.php');
 require_once('../Model/DAO_Correspondance.php');
+require_once ('../Model/DAO_Reponse.php');
 
 unset($_SESSION['message']);
 
@@ -19,6 +20,7 @@ $client= new DAOClient();
 $question = new DAOQuestion();
 $sondage = new DAOSondage();
 $correspondance = new DAOCorrespondance();
+$reponse = new DAOReponse();
 
 $module = 'accueil';
 $message="";
@@ -163,6 +165,9 @@ if(isset($_GET['nomSondage'])){
 	}
 	else {
 		$module='infoSondage';
+		$sondageAAfficher=$sondage->getByIDclientAndNom($_SESSION['id'],$_GET['nomSondage']);
+		$idSondage=$sondageAAfficher->__get("numeroSondage");
+		$_SESSION['idSondage']=$idSondage;
 		$_SESSION['nomSondage']=$_GET['nomSondage'];
 	}
 }	
@@ -251,6 +256,14 @@ if(isset($_GET['reponse']))
 
 }
 
+if(isset($_GET['listeReponse'])){
+	
+	$module="listeReponse";
+
+	}
+
+
+
 if ($module=='accueil'){
 
 	include('../Vue/start.php');
@@ -324,6 +337,13 @@ if($module=='reponse'){
 
 	include('../Vue/start.php');
 	include('../Vue/reponse.php');
+	include('../Vue/end.php');
+
+}
+
+if($module=="listeReponse"){
+	include('../Vue/start.php');
+	include('../Vue/voirReponse.php');
 	include('../Vue/end.php');
 
 }
