@@ -67,7 +67,7 @@ class DAOClient{
 		return false;
 	}
 
-		//insert user dans la table Cleint 
+		//insert user dans la table Client 
 	public function inscription($login,$email,$mdp){
 
 			//une personne pas forcément un client.
