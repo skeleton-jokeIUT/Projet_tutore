@@ -11,6 +11,7 @@ require_once('../Model/DAO_Client.php');
 require_once('../Model/DAO_Question.php');
 require_once('../Model/DAO_Sondage.php');
 require_once('../Model/DAO_Correspondance.php');
+require_once('../Model/DAO_Reponse.php');
 
 unset($_SESSION['message']);
 
@@ -238,7 +239,7 @@ if(isset($_GET['ajoutQuestion']) || isset($_POST['sauvegarderQuestion'])){
 	}
 }
 
-if(isset($_GET['reponse']))
+if(isset($_REQUEST['reponse']))
 {
 	$module="reponse";
 	if(isset($_GET['idSondage']) && $_GET['idSondage']!="" )
@@ -248,7 +249,59 @@ if(isset($_GET['reponse']))
 		$questions = $question->getByIdSondage($idSondage);
 		//var_dump($questions);
 	}
+	if(isset($_POST['idQuestion']))
+	{
+		$module="test_reponse";
+		if(!isset($_POST['idPersonne']))
+		{
+   	 		$idPersonne = null;
+		}
+		$rDao =new DAOReponse();
+		$typeQ=$_POST['typeQ'];
+		$idQuestion = $_POST['idQuestion'];
+		foreach($typeQ as $ligne => $type)
+		{
 
+   			switch($type)
+   			{
+        		case "qcm" :
+                    $reponse ="";
+                    $reponseQcm=$_POST['reponseQcm'];
+                    foreach($reponseQcm as $str)
+                    {
+                       $reponse=$reponse.$str." ";
+                    }
+                    break;
+        		case "qcu" : 
+                    $reponse= $_POST['reponseQcu'];
+                    break;
+        		case "echelle" :
+                    $reponse= $_POST['echelle'];
+                    break;
+        		case "zonetext" :   
+                    $reponse = $_POST['zonetext'];                   
+
+   			}
+   			if(isset($_POST['comment']))
+   			{
+       		 	$comment = $_POST['comment'];      
+   			}
+   			else
+   			{
+       			$comment = null;
+   			}
+   			$rDao->insertReponse($idPersonne,$idQuestion[$ligne] ,$reponse,$comment);
+		}
+
+	}
+
+}
+
+if($module=="test_reponse")
+{
+	include('../Vue/start.php');
+	include('../Vue/test_reponse.php');
+	include('../Vue/end.php');
 }
 
 if ($module=='accueil'){

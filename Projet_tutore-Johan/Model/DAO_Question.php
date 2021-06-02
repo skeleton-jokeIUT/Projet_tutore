@@ -24,6 +24,7 @@ class DAOQuestion{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$idS]);
 		$data = $req->fetchAll(); 
+		$req->closeCursor();
 		$questions=[];
 		foreach($data as $ligne =>$col)
 		{
