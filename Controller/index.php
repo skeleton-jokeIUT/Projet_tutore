@@ -11,7 +11,7 @@ require_once('../Model/DAO_Client.php');
 require_once('../Model/DAO_Question.php');
 require_once('../Model/DAO_Sondage.php');
 require_once('../Model/DAO_Correspondance.php');
-require_once ('../Model/DAO_Reponse.php');
+require_once('../Model/DAO_Reponse.php');
 
 unset($_SESSION['message']);
 
@@ -20,7 +20,7 @@ $client= new DAOClient();
 $question = new DAOQuestion();
 $sondage = new DAOSondage();
 $correspondance = new DAOCorrespondance();
-$reponse = new DAOReponse();
+$rDao =new DAOReponse();
 
 $module = 'accueil';
 $message="";
@@ -165,9 +165,6 @@ if(isset($_GET['nomSondage'])){
 	}
 	else {
 		$module='infoSondage';
-		$sondageAAfficher=$sondage->getByIDclientAndNom($_SESSION['id'],$_GET['nomSondage']);
-		$idSondage=$sondageAAfficher->__get("numeroSondage");
-		$_SESSION['idSondage']=$idSondage;
 		$_SESSION['nomSondage']=$_GET['nomSondage'];
 	}
 }	
@@ -243,7 +240,7 @@ if(isset($_GET['ajoutQuestion']) || isset($_POST['sauvegarderQuestion'])){
 	}
 }
 
-if(isset($_GET['reponse']))
+if(isset($_REQUEST['reponse']))
 {
 	$module="reponse";
 	if(isset($_GET['idSondage']) && $_GET['idSondage']!="" )
@@ -253,19 +250,59 @@ if(isset($_GET['reponse']))
 		$questions = $question->getByIdSondage($idSondage);
 		//var_dump($questions);
 	}
+	if(isset($_POST['idQuestion']))
+	{
+		$module="test_reponse";
+		if(!isset($_POST['idPersonne']))
+		{
+   	 		$idPersonne = null;
+		}
+		$typeQ=$_POST['typeQ'];
+		$idQuestion = $_POST['idQuestion'];
+		foreach($typeQ as $ligne => $type)
+		{
 
-}
+   			switch($type)
+   			{
+        		case "qcm" :
+                    $reponse ="";
+                    $reponseQcm=$_POST['reponseQcm'];
+                    foreach($reponseQcm as $str)
+                    {
+                       $reponse=$reponse.$str." ";
+                    }
+                    break;
+        		case "qcu" : 
+                    $reponse= $_POST['reponseQcu'];
+                    break;
+        		case "echelle" :
+                    $reponse= $_POST['echelle'];
+                    break;
+        		case "zonetext" :   
+                    $reponse = $_POST['zonetext'];                   
 
-if(isset($_GET['listeReponse'])){
-	
-	$module="listeReponse";
+   			}
+   			if(isset($_POST['comment']))
+   			{
+       		 	$comment = $_POST['comment'];      
+   			}
+   			else
+   			{
+       			$comment = null;
+   			}
+   			$rDao->insertReponse($idPersonne,$idQuestion[$ligne] ,$reponse,$comment);
+		}
 
 	}
 
-if(isset($_GET['listeQuestion'])){
-	$module="listeQuestion";
 }
 
+if($module=="test_reponse")
+{
+	include('../Vue/start.php');
+	include('../Vue/test_reponse.php');
+	include('../Vue/end.php');
+}
 
 if ($module=='accueil'){
 
@@ -344,16 +381,9 @@ if($module=='reponse'){
 
 }
 
-if($module=="listeReponse"){
-	include('../Vue/start.php');
-	include('../Vue/voirReponse.php');
-	include('../Vue/end.php');
+$nom=$sondage->getByIDclientAndNom(3, 'test4');
+$test=$nom->__get('numeroSondage');
+echo $test;
 
-}
 
-if($module=="listeQuestion"){
-	include('../Vue/start.php');
-	include('../Vue/voirQuestion.php');
-	include('../Vue/end.php');
-
-}
+//var_dump($module);

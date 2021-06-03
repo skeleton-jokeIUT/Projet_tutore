@@ -10,8 +10,8 @@ class DAOClient{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'util',
-   				'Util1234!');
+   				'Johan',
+   				'1234');
 		}
 
 		catch (Exception $e) {
@@ -67,7 +67,7 @@ class DAOClient{
 		return false;
 	}
 
-		//insert user dans la table Client 
+		//insert user dans la table Cleint 
 	public function inscription($login,$email,$mdp){
 
 			//une personne pas forcément un client.

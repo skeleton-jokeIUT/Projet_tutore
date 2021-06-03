@@ -10,47 +10,35 @@ class DAOReponse{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'util',
-   				'Util1234!');
+   				'Johan',
+   				'1234');
 		}
 
 		catch (Exception $e) {
      		die('Erreur'.$e->getMessage());
 		}
 	}
+    
+    public function insertReponse($idPersonne,$idQuestion,$reponse,$commentaire){
+        $sql = 'INSERT INTO reponse (ID_Personne,ID_Question,Reponse,commentaire) VALUES (:t_idPersonne,:t_idQuestion,:t_reponse,:t_commentaire);';
+		$req = $this->bdd->prepare($sql);
+		$req->execute(array('t_idPersonne'=>$idPersonne,
+                            't_idQuestion'=>$idQuestion,
+                            't_reponse'=>$reponse,
+                            't_commentaire'=>$commentaire));
+    }
 
-	public function afficherReponse($idSondage){
-
-		$sql ='SELECT * from question where ID_Sondage=?';
-		$req= $this->bdd->prepare($sql);
-		$req->execute([$idSondage]);
-
-		while($data=$req->fetch()){
-
-			echo '<p>Question : '.$data['nomQuestion'].'</p> 
-			<table>
-				<tbody>';
-
-			$sql2 ='SELECT * from reponse where ID_Question=?';
-			$req2= $this->bdd->prepare($sql2);
-			$req2->execute([$data['ID_Question']]);
-
-			$i=1;
-
-			while($data2=$req2->fetch()){
-
-				echo '<tr>
-						<td></td>
-						<td>Reponse '.$i.' : '.$data2['Reponse'].'</td>
-					  </tr>';
-
-				$i++;
-
-			}
-
-			echo '</tbody></table>';
-		}
-	}
-
-
+     public function getByIdQuestion($idQuestion){
+         $sql = 'SELECT * FROM sondage WHERE ID_Question =?;';
+         $req = $this->bdd->prepare($sql);
+         $req->execute([$idQuestion]);
+         $data = $req->fetchAll();
+         $req->closeCursor();
+         $reponse=[];
+        foreach($data as $ligne =>$col)
+        {
+            $reponse[$ligne] = new DTOReponse($col['ID_Personne'],$col['ID_Question'],$col['Reponse'],$col['commentaire']);
+        }
+        return $reponse;
+     }
 }

@@ -10,9 +10,10 @@ class DAOSondage{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'util',
-   				'Util1234!');
-   		}
+   				'Johan',
+   				'1234');
+		}
+
 		catch (Exception $e) {
      		die('Erreur'.$e->getMessage());
 		}
@@ -28,7 +29,6 @@ class DAOSondage{
 	}
 
 	public function getByIDclientAndNom($idClient, $nomSondage) { #permet de récupérer une ligne d'une personne via l'ID
-
  		$sql = 'SELECT * FROM sondage WHERE ID_client = ? and nomSondage=?';
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$idClient, $nomSondage]);
@@ -76,18 +76,17 @@ class DAOSondage{
 		}
 	}
 
-	public function afficherSondage($idClient, $login, $idSondage){
+	public function afficherSondage($idClient, $login, $nomSondage){
 
-		$sql='SELECT * FROM sondage where ID_client = ? and numero_sondage= ? ';
+		$sql='SELECT * FROM sondage where ID_client = ? and nomSondage= ? ';
 		$req=$this->bdd->prepare($sql);
-		$req->execute([$idClient, $idSondage]);
+		$req->execute([$idClient, $nomSondage]);
 		
 		$data=$req->fetch();
 
 		echo "Nom Sondage : ".$data['nomSondage']."<br>Créateur : ".$login."<br>Nombre de question : ".$data['nombre_question'];
 	}
 
-	
 
 	
 }

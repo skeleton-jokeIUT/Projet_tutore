@@ -10,8 +10,8 @@ class DAOQuestion{
 		try{
    			$this->bdd= new PDO(
    				"mysql:host=localhost;dbname=surv'easy;charset=utf8",
-   				'util',
-   				'Util1234!');
+   				'Johan',
+   				'1234');
 		}
 
 		catch (Exception $e) {
@@ -24,6 +24,7 @@ class DAOQuestion{
 		$req = $this->bdd->prepare($sql);
 		$req->execute([$idS]);
 		$data = $req->fetchAll(); 
+		$req->closeCursor();
 		$questions=[];
 		foreach($data as $ligne =>$col)
 		{
@@ -172,21 +173,15 @@ class DAOQuestion{
 						't_sousCat'=>$sousCat));
 	}
 
-	
-	public function afficherQuestion($idSondage){
+	public function remplirTableau(){
 
-		$sql='SELECT * from question where ID_Sondage=?';
-		$req=$this->bdd->prepare($sql);
-		$req->execute([$idSondage]);
+	}
 
-		$i=1;
 
-		while($data=$req->fetch()){
+	public function ajoutChamps($cpt){
 
-			echo '<p>Question '.$i.' : '.$data['nomQuestion'].'</p>';
-			$i++;
-		}
-
+		return '<br><label>Champ '.$cpt.' :<input type="text" name="champ'.$cpt.'"</label>';
+		
 	}
 	
 }

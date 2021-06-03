@@ -1,5 +1,5 @@
 <div>
-	<p>Information : <br><a><?= $sondage->afficherSondage($_SESSION['id'],$_SESSION['login'],$_SESSION['idSondage'])?></p>
+	<p>Information : <br><a><?= $sondage->afficherSondage($_SESSION['id'],$_SESSION['login'],$_SESSION['nomSondage'])?></p>
 </div>
 
 <div>
@@ -7,7 +7,5 @@
 	</p>
 	<form method="GET" action="index.php?creerQuestion">
 		<button name="ajoutQuestion">Ajoutez question</button>
-		<button name="listeQuestion">Voir la liste des questions</button>
-		<button name="listeReponse">Voir les réponses</button>
 	</form>
 </div>	

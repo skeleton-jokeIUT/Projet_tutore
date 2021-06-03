@@ -1,33 +1,38 @@
 <div class="reponse">
-    <form>
+    <form action="index.php?reponse=" method="POST">
     <?php
-        foreach($questions as $data)
-        {?>
+        foreach($questions as $ligne => $data)
+        {
+            $typeQ[$ligne] = $data->sousCategorie;
+            ?>
+           <input type="hidden" value="<?= $data->idQuestion?>" name="idQuestion[]" />
+           <input type="hidden" value="<?= $data->sousCategorie;?>" name="typeQ[]" />
             <p><?= $data->nomQuestion ?></p>
            <?php    
-           $typeQ = $data->sousCategorie;
            for($i=1;$i<=$data->nbChamps;$i++)
            {
                 $nb = "$i";
                 $champ = "champ";
                 $champ .= $nb;
                 $nbchamp = $champ;
-                switch($typeQ)
+                switch($typeQ[$ligne])
                 {
                     case "qcm" :
                         ?>    
-                            <label><?= $data->$nbchamp ?> : <input type="checkbox" name="champ[]" value=<?= $data->$nbchamp ?>></label>  
+                            <label><?= $data->$nbchamp ?> : <input type="checkbox" name="reponseQcm[]" value=<?= $data->$nbchamp ?>></label>  
                         <?php
                         break;
                     case "qcu" :
                         ?> 
-                        <label><?= $data->$nbchamp ?> <input type="radio" name="choix" value=<?= $data->$nbchamp ?>></label>
+                        <label><?= $data->$nbchamp ?> <input type="radio" name="reponseQcu" value=<?= $data->$nbchamp ?>></label>
                         <?php
                         break;
                 
-                }    
+                }                
+                   
            }
-           switch($typeQ)
+         
+           switch($typeQ[$ligne])
            {
                case "echelle" :
                 ?>
