@@ -20,6 +20,7 @@ $client= new DAOClient();
 $question = new DAOQuestion();
 $sondage = new DAOSondage();
 $correspondance = new DAOCorrespondance();
+$rDao =new DAOReponse();
 
 $module = 'accueil';
 $message="";
@@ -256,7 +257,6 @@ if(isset($_REQUEST['reponse']))
 		{
    	 		$idPersonne = null;
 		}
-		$rDao =new DAOReponse();
 		$typeQ=$_POST['typeQ'];
 		$idQuestion = $_POST['idQuestion'];
 		foreach($typeQ as $ligne => $type)

@@ -20,8 +20,7 @@ class DAOReponse{
 	}
     
     public function insertReponse($idPersonne,$idQuestion,$reponse,$commentaire){
-        $sql = 'INSERT INTO reponse (ID_Personne,ID_Question,Reponse,commentaire) 
-                VALUES (:t_idPersonne,:t_idQuestion,:t_reponse,:t_commentaire);';
+        $sql = 'INSERT INTO reponse (ID_Personne,ID_Question,Reponse,commentaire) VALUES (:t_idPersonne,:t_idQuestion,:t_reponse,:t_commentaire);';
 		$req = $this->bdd->prepare($sql);
 		$req->execute(array('t_idPersonne'=>$idPersonne,
                             't_idQuestion'=>$idQuestion,
